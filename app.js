@@ -11,10 +11,17 @@ const app = express();
 app.use(morgan("dev"));
 
 // Handle routing
-// app.use("/api/v1/stars", (req, res) => {
-//   res.json({ message: "Hello!" });
-// });
 app.route("/api/v1/stars").get(starsRoutes.getAllStars);
+
+// 404 errors
+app.use((req, res) => {
+  res.status(404).send("Page not found!");
+});
+
+// Any other errors
+app.use((err, req, res) => {
+  res.status(500).send("Server error");
+});
 
 // Run server
 const port = process.env.PORT || config.get("port");
