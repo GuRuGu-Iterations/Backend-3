@@ -12,6 +12,7 @@ app.use(morgan("dev"));
 
 // Handle routing
 app.route("/api/v1/stars").get(starsRoutes.getAllStars);
+app.route("/api/v1/stars/:name").get(starsRoutes.getOneStar);
 
 // 404 errors
 app.use((req, res) => {
